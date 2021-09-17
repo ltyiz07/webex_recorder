@@ -54,19 +54,16 @@ if __name__ == "__main__":
         # auto_selec = WebDriverWait(dv, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '')))
         container = WebDriverWait(dv, 10).until(EC.presence_of_element_located((By.ID, 'meetingSimpleContainer')))
         print("container: ", container)
-        time.sleep(4)
+        time.sleep(2)
         key.send("ESCAPE")
-        auto_selec = dv.find_elements_by_tag_name('button')
+        # auto_selec = dv.find_elements_by_tag_name('button')
+        auto_selec = WebDriverWait(dv, 10).until(EC.element_to_be_clickable((By.TAG_NAME, 'button')))
         auto_selec[1].click()
         key.send("DOWN + RETURN")
         print("audio selection is ready!")
     except TimeoutException:
         print("audio selection loading took too much time!")
-
-    btns = dv.find_elements_by_tag_name("button")
-    print(btns)
-    btns[0].click()
-    # auto_selec = dv.find_elements_by_tag_name('button')[0].click()
+    key.send("ESCAPE")
 
     dv.switch_to.default_content()
 
